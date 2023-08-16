@@ -3,6 +3,11 @@ base: core22 # the base snap is the execution environment for this snap
 adopt-info: teleprompter
 grade: stable # must be 'stable' to release into candidate/stable channels
 confinement: strict # use 'strict' once you have the right plugs and slots
+website: https://github.com/Nokse22/teleprompter
+license: GPL-3.0
+source-code: https://github.com/Nokse22/teleprompter
+issues: https://github.com/Nokse22/teleprompter/issues
+contact: https://github.com/Nokse22/teleprompter
 
 architectures:
   - build-on: amd64
