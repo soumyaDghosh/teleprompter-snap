@@ -14,7 +14,7 @@ parts:
     # See 'snapcraft plugins'
     plugin: meson
     source: https://github.com/Nokse22/teleprompter.git
-    #source-tag: 'v0.1.4'
+    source-tag: 'v0.1.5'
     source-depth: 1
     parse-info: [ usr/share/appdata/io.github.nokse22.teleprompter.appdata.xml ]
     build-packages:
