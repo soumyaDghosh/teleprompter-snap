@@ -1,0 +1,40 @@
+name: teleprompter # you probably want to 'snapcraft register <name>'
+base: core22 # the base snap is the execution environment for this snap
+adopt-info: teleprompter
+grade: stable # must be 'stable' to release into candidate/stable channels
+confinement: strict # use 'strict' once you have the right plugs and slots
+
+parts:
+  teleprompter:
+    # See 'snapcraft plugins'
+    plugin: meson
+    source: https://github.com/Nokse22/teleprompter.git
+    #source-tag: 'v0.1.4'
+    source-depth: 1
+    parse-info: [ usr/share/appdata/io.github.nokse22.teleprompter.appdata.xml ]
+    build-packages:
+      - blueprint-compiler
+    meson-parameters:
+      - --prefix=/snap/teleprompter/current/usr
+    override-build: |
+      craftctl default
+      sed -e '1c#!/usr/bin/env python3' -i ${CRAFT_PART_INSTALL}/snap/teleprompter/current/usr/bin/teleprompter
+      chmod +x $CRAFT_PART_INSTALL/snap/teleprompter/current/usr/bin/teleprompter
+    organize:
+      snap/teleprompter/current: .
+
+
+slots:
+  teleprompter:
+    interface: dbus
+    bus: session
+    name: io.github.nokse22.teleprompter
+
+apps:
+  teleprompter:
+    command: usr/bin/teleprompter
+    extensions: [ gnome ]
+    common-id: io.github.nokse22.teleprompter
+    desktop: usr/share/applications/io.github.nokse22.teleprompter.desktop
+    environment:
+      GDK_DEBUG: 'portals'
